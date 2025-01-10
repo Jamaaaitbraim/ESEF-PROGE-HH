@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #00aaff; /* اللون الأزرق المضيء */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .profile {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* صورة الملف الشخصي */
+        .profile .image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+            margin-top: -50px; /* لجعل الصورة تخرج من الإطار */
+        }
+
+        .profile .image-container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .profile .image-container img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* الاسم مع تأثير الألوان المتغيرة */
+        @keyframes colorChange {
+            0% { color: #00aaff; }
+            33% { color: #ffd700; }
+            66% { color: #ff4500; }
+            100% { color: #00aaff; }
+        }
+
+        .profile h1 {
+            font-size: 24px;
+            animation: colorChange 3s infinite;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+
+        /* خانة المعلومات */
+        .profile .description {
+            margin: 10px 0;
+            font-size: 14px;
+            font-style: italic;
+            color: #666;
+        }
+
+        /* معلومات الاتصال */
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .contact-info a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .contact-info img {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+
+        /* تصميم الرقم 88 */
+        .rating .rating-number {
+            font-size: 60px;
+            font-weight: bold;
+            color: #ff4500;
+            text-shadow: 
+                2px 2px 2px #ffcc00, 
+                -2px -2px 2px #00aaff, 
+                2px -2px 2px #ff4500, 
+                -2px 2px 2px #ffd700;
+        }
+
+        .rating .details {
+            font-size: 14px;
+            position: absolute;
+            top: -15px;
+            right: 0;
+            transform: translateX(50%);
+            color: #00aaff98; /* الأزرق الفاتح المضيء */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <!-- Image Container -->
+        <div class="image-container">
+            <img src="WIN_20241124_18_09_56_Pro.jpg" alt="Person Photo" id="profilePic">
+        </div>
+        <!-- Name -->
+        <h1>JAMAA . </h1>
+        <!-- Description -->
+        <p class="description">KIND PERSONR </p>
+        <!-- Information Contact -->
+        <div class="contact-info">
+            <a href="https://www.instagram.com/yourusername" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> Instagram
+            </a>
+            <a href="https://www.facebook.com/yourusername" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Facebook
+            </a>
+        </div>
+
+        <!-- Rating Section -->
+        <div class="rating">
+            <div class="rating-number"> 100%</div>
+            <div class="details">
+                <div>Rating</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #00aaff; /* اللون الأزرق المضيء */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .profile {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* صورة الملف الشخصي */
+        .profile .image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+            margin-top: -50px; /* لجعل الصورة تخرج من الإطار */
+        }
+
+        .profile .image-container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .profile .image-container img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* الاسم مع تأثير الألوان المتغيرة */
+        @keyframes colorChange {
+            0% { color: #00aaff; }
+            33% { color: #ffd700; }
+            66% { color: #ff4500; }
+            100% { color: #00aaff; }
+        }
+
+        .profile h1 {
+            font-size: 24px;
+            animation: colorChange 3s infinite;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+
+        /* خانة المعلومات */
+        .profile .description {
+            margin: 10px 0;
+            font-size: 14px;
+            font-style: italic;
+            color: #666;
+        }
+
+        /* معلومات الاتصال */
+        .contact-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .contact-info a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .contact-info img {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+
+        /* تصميم الرقم 88 */
+        .rating .rating-number {
+            font-size: 60px;
+            font-weight: bold;
+            color: #ff4500;
+            text-shadow: 
+                2px 2px 2px #ffcc00, 
+                -2px -2px 2px #00aaff, 
+                2px -2px 2px #ff4500, 
+                -2px 2px 2px #ffd700;
+        }
+
+        .rating .details {
+            font-size: 14px;
+            position: absolute;
+            top: -15px;
+            right: 0;
+            transform: translateX(50%);
+            color: #00aaff98; /* الأزرق الفاتح المضيء */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <!-- Image Container -->
+        <div class="image-container">
+            <img src="WIN_20241107_18_10_41_Pro.jpg" alt="Person Photo" id="profilePic">
+        </div>
+        <!-- Name -->
+        <h1>AYOUB . </h1>
+        <!-- Description -->
+        <p class="description">HAPYYY PERSONR </p>
+        <!-- Information Contact -->
+        <div class="contact-info">
+            <a href="https://www.instagram.com/yourusername" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> Instagram
+            </a>
+            <a href="https://www.facebook.com/yourusername" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Facebook
+            </a>
+        </div>
+
+        <!-- Rating Section -->
+        <div class="rating">
+            <div class="rating-number"> 100%</div>
+            <div class="details">
+                <div>Rating</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

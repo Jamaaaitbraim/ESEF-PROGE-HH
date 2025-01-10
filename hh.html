@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Pages with Sidebar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            position: relative; /* لتكون العناصر في نفس السياق */
+        }
+
+        .search-container {
+            width: 90%;
+            background-color: #1E90FF;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            width: 60%;
+            height: 30px;
+            border: 2px solid #1E90FF;
+            border-radius: 20px;
+            padding: 0 15px;
+            font-size: 1em;
+            color: #333;
+            background-color: #ADD8E6;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+        }
+
+        .search-box:focus {
+            outline: none;
+        }
+
+        .search-box::placeholder {
+            color: #555;
+            font-style: italic;
+        }
+
+        .search-btn {
+            background-color: #4682B4;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-left: 10px;
+        }
+
+        .toggle-sidebar-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #4682B4;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: auto;
+            background: linear-gradient(45deg, #1E90FF, #87CEEB);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: absolute;
+            top: 100px;
+            left: 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transform: translateX(-250px); /* إخفاء الشريط بشكل افتراضي */
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.visible {
+            transform: translateX(0); /* إظهار الشريط الجانبي */
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5em;
+            margin: 20px 0;
+            padding: 15px 10px;
+            border-radius: 10px;
+            position: relative;
+            display: block;
+            transition: background-color 0.3s, color 0.3s;
+            text-align: center;
+            height: 60px;
+            line-height: 45px;
+        }
+
+        .sidebar a:hover {
+            background-color: #FF6347;
+            color: #f0f0f0;
+            box-shadow: 0 0 15px rgba(255, 99, 71, 0.5);
+        }
+
+        .sidebar a:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: rgba(255, 99, 71, 0.2);
+            transition: width 0.3s ease;
+        }
+
+        .sidebar a:hover:before {
+            width: 100%;
+        }
+
+        .content {
+            padding: 20px;
+            margin-left: 250px;
+            transition: margin-left 0.3s ease;
+            position: relative;
+        }
+
+        .results-container {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-item {
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .welcome {
+            font-size: 3em;
+            font-weight: bold;
+            display: flex;
+            gap: 5px;
+            opacity: 1;
+            animation: slideIn 1s infinite;
+        }
+
+        .welcome {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .welcome span {
+            display: inline-block;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .welcome span:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .welcome span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        .welcome span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        .welcome span:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+        .welcome span:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+        .welcome span:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+        .welcome span:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .welcome.hidden {
+            display: none;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <button class="toggle-sidebar-btn" onclick="toggleSidebar()">☰</button>
+
+    <div class="search-container">
+        <input type="text" id="searchBox" class="search-box" placeholder="Search...">
+        <button class="search-btn" onclick="performSearch(); toggleResults();">Search</button>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="loadPage('page1')">English 1</a>
+        <a href="#" onclick="loadPage('page2')">English 2</a>
+        <a href="#" onclick="loadPage('page3')">English 3</a>
+    </div>
+
+    <div class="results-container" id="resultsContainer"></div>
+
+    <div class="content">
+        <img src="IMG-20241227-WA0005[1].jpg" alt="Welcome Image" class="main-image">
+        <h1 class="welcome" id="welcomeText">
+            <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span>
+        </h1>
+    </div>
+
+    <script>
+        function loadPage(page) {
+            if (page === 'page1') {
+                window.location.href = "AA.html"; 
+            } else if (page === 'page2') {
+                window.location.href = "BB.html"; 
+            } else if (page === 'page3') {
+                window.location.href = "CC.html"; 
+            }
+        }
+
+        const data = [
+            { id: 1, title: "HTML Basics", description: "Learn the basics of HTML." },
+            { id: 2, title: "CSS Fundamentals", description: "Master the basics of CSS." },
+            { id: 3, title: "JavaScript Introduction", description: "An introduction to JavaScript programming." },
+        ];
+
+        function performSearch() {
+            const searchQuery = document.getElementById("searchBox").value.toLowerCase();
+            const resultsContainer = document.getElementById("resultsContainer");
+            const filteredData = data.filter(item =>
+                item.title.toLowerCase().includes(searchQuery) ||
+                item.description.toLowerCase().includes(searchQuery)
+            );
+
+            resultsContainer.innerHTML = filteredData.map(item => `
+                <div class="result-item">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                </div>
+            `).join("");
+        }
+
+        function toggleResults() {
+            const resultsContainer = document.getElementById("resultsContainer");
+            resultsContainer.style.display = resultsContainer.style.display === "block" ? "none" : "block";
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("visible");
+        }
+    </script>
+</body>
+</html>
